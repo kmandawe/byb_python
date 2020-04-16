@@ -68,11 +68,35 @@ class RefrigeratedShippingContainer(ShippingContainer):
     def _make_bic_code(owner_code, serial):
         return iso6346.create(owner_code=owner_code, serial=str(serial).zfill(6), category='R')
 
+    @staticmethod
+    def _c_to_f(celsius):
+        return celsius * 9/5 + 32
+
+    @staticmethod
+    def _f_to_c(fahrenheit):
+        return (fahrenheit - 32) * 5/9
+
     def __init__(self, owner_code, contents, celsius):
         super().__init__(owner_code, contents)
-        if celsius > RefrigeratedShippingContainer.MAX_CELSIUS:
-            raise ValueError("Temperature too hot!")
         self.celsius = celsius
+
+    @property
+    def celsius(self):
+        return self._celsius
+
+    @celsius.setter
+    def celsius(self, value):
+        if value > RefrigeratedShippingContainer.MAX_CELSIUS:
+            raise ValueError("Temperature too hot!")
+        self._celsius = value
+
+    @property
+    def fahrenheit(self):
+        return RefrigeratedShippingContainer._c_to_f(self.celsius)
+
+    @fahrenheit.setter
+    def fahrenheit(self, value):
+        self.celsius = RefrigeratedShippingContainer._f_to_c(value)
 
 
 # r1 = RefrigeratedShippingContainer("MAE", 'fish')
@@ -102,9 +126,26 @@ print(bic1)
 # print(r2)
 # print(r2.contents)
 
-r3 = RefrigeratedShippingContainer.create_with_items("ESC", ["brocolli", "cauliflower", "carrots"], celsius=2.0)
-print(r3)
-print(r3.bic)
+# r3 = RefrigeratedShippingContainer.create_with_items("ESC", ["brocolli", "cauliflower", "carrots"], celsius=2.0)
+# print(r3)
+# print(r3.bic)
+#
+# r3.celsius = 12.0
 
-r3.celsius = 12.0
 
+r4 = RefrigeratedShippingContainer.create_with_items("YML", ["fish"], celsius=-18.0)
+print(r4.celsius)
+r4.celsius = -5.0
+
+r5 = RefrigeratedShippingContainer.create_with_items("YML", ["prawns"], celsius=-18.0)
+print(r5.celsius)
+r5.celsius = -19.0
+print(r5.celsius)
+# r5.celsius = 5.0
+
+r6 = RefrigeratedShippingContainer.create_empty("YML", celsius=-20.0)
+print(r6.fahrenheit)
+r6.fahrenheit = -10.0
+print(r6.celsius)
+
+r7 = RefrigeratedShippingContainer.create_empty("MAE", celsius=7.0)
