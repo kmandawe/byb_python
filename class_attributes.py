@@ -2,7 +2,6 @@ import iso6346
 
 
 class ShippingContainer:
-
     next_serial = 1337
 
     @staticmethod
@@ -26,7 +25,7 @@ class ShippingContainer:
     def __init__(self, owner_code, contents):
         self.owner_code = owner_code
         self.contents = contents
-        self.bic = ShippingContainer._make_bic_code(owner_code=owner_code, serial=ShippingContainer._get_next_serial())
+        self.bic = self._make_bic_code(owner_code=owner_code, serial=ShippingContainer._get_next_serial())
 
 
 c1 = ShippingContainer("YML", "books")
@@ -38,7 +37,6 @@ c2 = ShippingContainer("MAE", "clothes")
 
 print(c2.owner_code)
 print(c2.contents)
-
 
 c4 = ShippingContainer("ESC", "electronics")
 # print(c4.serial)
@@ -58,7 +56,33 @@ print(c7.contents)
 c8 = ShippingContainer.create_with_items("MAE", ['food', 'textiles', 'minerals'])
 print(c8.contents)
 
-
 c9 = ShippingContainer.create_empty("YML")
 print(c9.bic)
 
+
+class RefrigeratedShippingContainer(ShippingContainer):
+
+    @staticmethod
+    def _make_bic_code(owner_code, serial):
+        return iso6346.create(owner_code=owner_code, serial=str(serial).zfill(6), category='R')
+
+
+r1 = RefrigeratedShippingContainer("MAE", 'fish')
+print(r1.bic)
+
+bic1 = ShippingContainer._make_bic_code("MAE", 1234)
+print(bic1)
+
+bic2 = RefrigeratedShippingContainer._make_bic_code("MAE", 1234)
+print(bic2)
+
+c = ShippingContainer("ESC", "textiles")
+bic1 = c._make_bic_code("MAE", 1234)
+print(bic1)
+
+r = RefrigeratedShippingContainer("ESC", 'peas')
+bic2 = r._make_bic_code("MAE", 1234)
+print(bic2)
+
+r2 = RefrigeratedShippingContainer("MAE", "fish")
+print(r2.bic)
