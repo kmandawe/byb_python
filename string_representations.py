@@ -37,15 +37,29 @@ class Point2D:
 # print(repr(d))
 
 
-print("This is a point: {}".format(Point2D(1, 2)))
+# print("This is a point: {}".format(Point2D(1, 2)))
+#
+# print("{}".format(Point2D(1, 2)))
+# print("{:r}".format(Point2D(1, 2)))
+# print("{!r}".format(Point2D(1, 2)))
+# print("{!s}".format(Point2D(1, 2)))
+#
+# import reprlib
+# points = [Point2D(x, y) for x in range(1000) for y in range(1000)]
+# print(len(points))
+# print(reprlib.repr(points))
 
-print("{}".format(Point2D(1, 2)))
-print("{:r}".format(Point2D(1, 2)))
-print("{!r}".format(Point2D(1, 2)))
-print("{!s}".format(Point2D(1, 2)))
+x = "HÁLLO"
+print(x)
+print(type(x))
+y = ascii(x)
+print(y)
+print(type(y))
 
-import reprlib
-points = [Point2D(x, y) for x in range(1000) for y in range(1000)]
-print(len(points))
-print(reprlib.repr(points))
+x = '¾'
+print(ord(x))
+print(chr(190))
+print(chr(ord()))
+print(ord(chr(190)))
+
 
