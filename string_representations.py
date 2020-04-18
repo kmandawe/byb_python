@@ -6,8 +6,8 @@ class Point2D:
     def __str__(self):
         return '({}, {})'.format(self.x, self.y)
 
-    def __repr__(self):
-        return 'Point2D(x={}, y={})'.format(self.x, self.y)
+    # def __repr__(self):
+    #     return 'Point2D(x={}, y={})'.format(self.x, self.y)
 
 
 p = Point2D(x=42, y=69)
