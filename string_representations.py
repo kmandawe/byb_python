@@ -9,6 +9,12 @@ class Point2D:
     def __repr__(self):
         return 'Point2D(x={}, y={})'.format(self.x, self.y)
 
+    def __format__(self, format_spec):
+        if format_spec == 'r':
+            return "{}, {}".format(self.y, self.x)
+        else:
+            return "{}, {}".format(self.x, self.y)
+
 
 # p = Point2D(x=42, y=69)
 # print(p)
@@ -22,12 +28,19 @@ class Point2D:
 #
 # print(Point2D(3, 5))
 
-l = [Point2D(i, i * 2) for i in range(3)]
-print(str(l))
-print(repr(l))
+# l = [Point2D(i, i * 2) for i in range(3)]
+# print(str(l))
+# print(repr(l))
+#
+# d = {i: Point2D(i, i * 2) for i in range(3)}
+# print(str(d))
+# print(repr(d))
 
-d = {i: Point2D(i, i * 2) for i in range(3)}
-print(str(d))
-print(repr(d))
 
+print("This is a point: {}".format(Point2D(1, 2)))
+
+print("{}".format(Point2D(1, 2)))
+print("{:r}".format(Point2D(1, 2)))
+print("{!r}".format(Point2D(1, 2)))
+print("{!s}".format(Point2D(1, 2)))
 
