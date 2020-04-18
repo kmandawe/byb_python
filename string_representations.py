@@ -44,3 +44,8 @@ print("{:r}".format(Point2D(1, 2)))
 print("{!r}".format(Point2D(1, 2)))
 print("{!s}".format(Point2D(1, 2)))
 
+import reprlib
+points = [Point2D(x, y) for x in range(1000) for y in range(1000)]
+print(len(points))
+print(reprlib.repr(points))
+
