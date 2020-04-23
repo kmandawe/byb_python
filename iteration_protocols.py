@@ -1,7 +1,7 @@
 class ExampleIterator:
-    def __init__(self):
+    def __init__(self, data):
         self.index = 0
-        self.data = [1, 2, 3]
+        self.data = data
 
     def __iter__(self):
         return self
@@ -15,13 +15,29 @@ class ExampleIterator:
         return rslt
 
 
-i = ExampleIterator()
-print(next(i))
-print(next(i))
-print(next(i))
-# print(next(i))
+class ExampleIterable:
+    def __init__(self):
+        self.data = [1, 2, 3]
+
+    def __iter__(self):
+        return ExampleIterator(self.data)
 
 
-i = ExampleIterator()
-for i in ExampleIterator():
+for i in ExampleIterable():
     print(i)
+
+
+print([i * 3 for i in ExampleIterable()])
+
+
+
+# i = ExampleIterator()
+# print(next(i))
+# print(next(i))
+# print(next(i))
+# # print(next(i))
+#
+#
+# i = ExampleIterator()
+# for i in ExampleIterator():
+#     print(i)
