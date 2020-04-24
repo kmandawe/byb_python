@@ -1,4 +1,7 @@
-class SortedSet:
+from collections import Sequence
+
+
+class SortedSet(Sequence):
 
     def __init__(self, items=None):
         self._items = sorted(set(items)) if items is not None else []
@@ -32,3 +35,5 @@ class SortedSet:
         if not isinstance(other, SortedSet):
             return NotImplemented
         return self._items != other._items
+
+
