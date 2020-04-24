@@ -1,3 +1,4 @@
+from bisect import bisect_left
 from collections import Sequence
 
 
@@ -35,5 +36,10 @@ class SortedSet(Sequence):
         if not isinstance(other, SortedSet):
             return NotImplemented
         return self._items != other._items
+
+    def count(self, item):
+        index = bisect_left(self._items, item)
+        found = (index != len(self._items)) and (self._items[index] == item)
+        return int(found)
 
 
