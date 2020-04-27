@@ -1,4 +1,6 @@
+import io
 import math
+import sys
 
 
 class TriangleError(Exception):
@@ -27,6 +29,23 @@ def triangle_area(a, b, c):
     return a
 
 
-print(triangle_area(3, 4, 5))
+def main():
+    try:
+        a = triangle_area(3, 4, 10)
+        print(a)
+    except TriangleError as e:
+        try:
+            print(e, file=sys.stdin)
+        except io.UnsupportedOperation as f:
+            print(e)
+            print(f)
+            print(f.__context__ is e)
 
-print(triangle_area(3, 4, 10))
+
+if __name__ == '__main__':
+    main()
+
+
+# print(triangle_area(3, 4, 5))
+#
+# print(triangle_area(3, 4, 10))
