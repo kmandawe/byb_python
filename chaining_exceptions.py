@@ -1,4 +1,5 @@
 import math
+import traceback
 
 
 class InclinationError(Exception):
@@ -12,12 +13,28 @@ def inclination(dx, dy):
         raise InclinationError("Slope cannot be vertical") from e
 
 
-print(inclination(3, 5))
+# print(inclination(3, 5))
 
 # print(inclination(0, 5))
 
-try:
-    inclination(0, 5)
-except InclinationError as e:
-    print(e)
-    print(e.__cause__)
+# try:
+#     inclination(0, 5)
+# except InclinationError as e:
+#     print(e)
+#     print(e.__cause__)
+
+
+def main():
+    try:
+        inclination(0, 5)
+    except InclinationError as e:
+        print(e.__traceback__)
+        traceback.print_tb(e.__traceback__)
+        s = traceback.format_tb(e.__traceback__)
+        print(s)
+
+
+if __name__ == '__main__':
+    main()
+    print("Finished")
+
