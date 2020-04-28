@@ -14,6 +14,10 @@ class LoggingContextManager:
 
 
 with LoggingContextManager() as x:
-    raise ValueError('Something has gone wrong!')
+    # raise ValueError('Something has gone wrong!')
     print(x)
 
+
+f = open('a_file', 'w')
+with f as g:
+    print(f is g)
