@@ -31,5 +31,11 @@ with f as g:
 with LoggingContextManager():
     pass
 
-with LoggingContextManager():
-    raise ValueError("Core meltdown imminent!")
+# with LoggingContextManager():
+#     raise ValueError("Core meltdown imminent!")
+
+try:
+    with LoggingContextManager():
+        raise ValueError("The system is down!")
+except ValueError:
+    print("*** ValueError detected ***")
